@@ -1,15 +1,12 @@
 let tempNum = "";
 let defaultNum = "0";
-let num1 = 0;
-let num2 = 0;
-let firstOperand = null;
-let secondOperand = null;
-
 
 function screenNum(num) {
     const screen = document.querySelector(".screen");
-
-    screen.textContent = parseFloat(num);
+     if (num === "") {
+        num = defaultNum;
+     }
+    screen.textContent = num;
 }
 
 function makeClickNumber() {
@@ -21,7 +18,7 @@ function makeClickNumber() {
                 if (tempNum === "" || tempNum === "0") {
                     tempNum = "";
                 } else {
-                    tempNum += i;
+                    tempNum += `${i}`;
                     screenNum(tempNum);
                 }
             });
@@ -29,7 +26,7 @@ function makeClickNumber() {
             let numsi = document.querySelector(".item-number#num" + i);
 
             numsi.addEventListener("click", () => {
-                tempNum += i;
+                tempNum += `${i}`;
 
                 screenNum(tempNum);
             });
@@ -37,15 +34,10 @@ function makeClickNumber() {
     }
 }
 
-// function operate (firstNum, secNum, operand) {
-//     if (operand === "/") {
-//         result = firstNum / secNum;
-//         tempNum = "";
-//         tempNum += result;
-//         screenNum(tempNum);
-//     }
-
-// }
+function operate(value) {
+    const result = eval(value);
+    return result
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     screenNum(defaultNum);
@@ -60,6 +52,18 @@ reset.addEventListener("click", () => {
     screenNum(defaultNum);
 });
 
+const deleteB = document.querySelector(".item#delete");
+
+deleteB.addEventListener("click", () => {
+    tempNum = tempNum.slice(0, -1);
+    screenNum(tempNum);
+
+    if (tempNum === "") {
+        tempNum = "";
+        screenNum(tempNum);
+    }
+});
+
 const plusminus = document.querySelector(".item#plusminus");
 
 plusminus.addEventListener("click", () => {
@@ -72,25 +76,60 @@ plusminus.addEventListener("click", () => {
     }
 });
 
-const persen = document.querySelector(".item#persen");
+const divided = document.querySelector(".item#divided");
 
-persen.addEventListener("click", () => {
-    if (tempNum === "") {
-        screenNum(defaultNum);
+divided.addEventListener("click", () => {
+    if (tempNum.includes("+") || tempNum.includes("-") ||
+        tempNum.includes("/") || tempNum.includes("*")) {
+        let num = operate(tempNum);
+        tempNum = num + " / ";
+        screenNum(tempNum);
     } else {
-        num = parseInt(tempNum);
-
-        result = parseFloat(num / 100);
-        tempNum = "";
-        tempNum += result;
+        tempNum += " / ";
         screenNum(tempNum);
     }
 });
 
-const divided = document.querySelector(".item#divided");
+const multiply = document.querySelector(".item#multiply");
 
-divided.addEventListener("click", () => {
-    
+multiply.addEventListener("click", () => {
+    if (tempNum.includes("+") || tempNum.includes("-") ||
+        tempNum.includes("/") || tempNum.includes("*")) {
+        let num = operate(tempNum);
+        tempNum = num + " * ";
+        screenNum(tempNum);
+    } else {
+        tempNum += " * ";
+        screenNum(tempNum);
+    }
+});
+
+const subtract = document.querySelector(".item#subtract");
+
+subtract.addEventListener("click", () => {
+    if (tempNum.includes("+") || tempNum.includes("-") ||
+        tempNum.includes("/") || tempNum.includes("*")) {
+        let num = operate(tempNum);
+        tempNum = num + " - ";
+        screenNum(tempNum);
+    } else {
+        tempNum += " - ";
+        screenNum(tempNum);
+    }
+});
+
+const add = document.querySelector(".item#add");
+
+add.addEventListener("click", () => {
+    if (tempNum.includes("+") || tempNum.includes("-") ||
+        tempNum.includes("/") || tempNum.includes("*")) {
+        let num = operate(tempNum);
+        tempNum = num + " + ";
+        screenNum(tempNum);
+    } else {
+        tempNum += " + ";
+        screenNum(tempNum);
+    }
 });
 
 const comma = document.querySelector(".item#comma");
@@ -103,4 +142,18 @@ comma.addEventListener("click", () => {
     }
 
     screenNum(tempNum);
+});
+
+const equal = document.querySelector(".item#result");
+
+equal.addEventListener("click", () => {
+    if (tempNum.includes("+") || tempNum.includes("-") ||
+        tempNum.includes("/") || tempNum.includes("*")) {
+        let num = operate(tempNum);
+        tempNum = num.toString();
+        screenNum(tempNum);
+    } else {
+        tempNum += "";
+        screenNum(tempNum);
+    }
 });
