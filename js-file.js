@@ -6,7 +6,7 @@ function screenNum(num) {
      if (num === "") {
         num = defaultNum;
      }
-    screen.textContent = num;
+    screen.value = num;
 }
 
 function makeClickNumber() {
@@ -69,6 +69,10 @@ const plusminus = document.querySelector(".item#plusminus");
 plusminus.addEventListener("click", () => {
     if (tempNum.includes("-")) {
         tempNum = tempNum.substring(1);
+        screenNum(tempNum);
+    } else if (tempNum === "") {
+        tempNum = "0"
+        tempNum = "-" + tempNum;
         screenNum(tempNum);
     } else {
         tempNum = "-" + tempNum;
@@ -156,4 +160,11 @@ equal.addEventListener("click", () => {
         tempNum += "";
         screenNum(tempNum);
     }
+});
+
+const display = document.querySelector(".screen");
+
+display.addEventListener("input", () => {
+    tempNum = display.value.toString();
+    screenNum(tempNum);
 });

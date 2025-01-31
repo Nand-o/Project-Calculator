@@ -1,11 +1,30 @@
-.body {
-    margin: 50px;
-}
+html,
+body{ 
+    margin:0; 
+    padding:0; 
+    height:100%; 
+    width:100%;
+ }
 
-.container {
+ .heading {
     display: flex;
+    flex-direction: column;
+    font-size: 30px;
     justify-content: center;
     align-items: center;
+    margin: 0px;
+ }
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    flex: auto;
 }
 
 #calculator {
@@ -15,18 +34,19 @@
     border: 5px solid black;
     width: 450px;
     height: 550px;
+    border-radius: 5px;
 }
 
 .screen {
-    display: flex;
+    text-align: end;
     width: 450px;
     height: 100px;
     border: 5px solid black;
-    justify-content: flex-end;
     align-items: center;
     box-sizing: border-box;
     padding: 10px;
     font-size: 50px;
+    background-color: whitesmoke;
 }
 
 .operator {
@@ -36,13 +56,24 @@
     width: 450px;
     height: 350px;
     box-sizing: border-box;
-
 }
 
 #row {
     display: flex;
     justify-content: space-evenly;
     flex-grow: 1;
+}
+
+.item-number {
+    background-color: #A6CDC6;
+
+}
+
+.item {
+    background-color: #DDA853;
+}
+.item#comma {
+    background-color: #A6CDC6;
 }
 
 .item,
@@ -53,10 +84,19 @@
     box-sizing: border-box;
     border: 1px solid black;
     align-items: center;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.item#plusminus,
+.item#reset,
+.item#delete {
+    font-weight: bold;
+    background-color: #16404D;
 }
 
 .item-number#num0 {
-   flex-grow: 2.01;
+   flex-grow: 2.02;
 }
 
 #bottom {
@@ -70,4 +110,5 @@
 #bottom {
     border-left: 5px solid black;
     border-right: 5px solid black;
+    background-color: black;
 }
